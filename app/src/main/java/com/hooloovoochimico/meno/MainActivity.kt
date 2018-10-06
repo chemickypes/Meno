@@ -14,6 +14,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val button = findViewById<Button>(R.id.button)
+        button.setOnClickListener{
+            val note = Notifier(this, 1,Memo(1, "prova1", "gne gne gne"))
+            note.showNotify()
+        }
+
 
 
     }

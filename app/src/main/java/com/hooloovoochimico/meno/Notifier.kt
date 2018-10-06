@@ -16,6 +16,7 @@ class Notifier(private val context: Context, private val notificationId: Int, pr
 
     init {
         createNotificationChannel()
+        setNotify()
     }
 
     fun showNotify(){
@@ -25,9 +26,9 @@ class Notifier(private val context: Context, private val notificationId: Int, pr
         }
     }
 
-    fun setNotify(){
+    private fun setNotify(){
         mNotifyBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
-//                .setSmallIcon(R.drawable.notification_icon)
+                .setSmallIcon(R.drawable.ic_launcher_background)
                 .setContentTitle(memo.title)
                 .setContentText(memo.body)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
