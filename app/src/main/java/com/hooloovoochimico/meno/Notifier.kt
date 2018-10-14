@@ -38,17 +38,14 @@ class Notifier(private val context: Context, private val notificationId: Int, pr
         mNotifyBuilder = NotificationCompat.Builder(context, MENO_CHANNEL_ID).apply {
             setSmallIcon(R.drawable.ic_launcher_background)
             setContentTitle(memo.title)
-            setContentText(memo.body)
+            setContentText(memo.body.substring(0..20)+ "...")
+            setStyle(NotificationCompat.BigTextStyle().bigText(memo.body))
             priority = NotificationCompat.PRIORITY_DEFAULT
             setVisibility(VISIBILITY_PUBLIC)
             addAction(R.drawable.common_google_signin_btn_icon_dark,
                 context.getString(R.string.modify_text),
                 modifyPendingIntent)
         }
-    }
-
-    fun setBigText(){
-        mNotifyBuilder?.setStyle(NotificationCompat.BigTextStyle().bigText(memo.body))
     }
 
     private fun createNotificationChannel() {

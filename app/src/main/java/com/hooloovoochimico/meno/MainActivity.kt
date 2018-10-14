@@ -22,9 +22,10 @@ class MainActivity : AppCompatActivity() {
             note.showNotify()
         }
 
-        if(intent.hasCategory(EXTRA_MODIFY_ID)){
-            val testo = "Questa è l'evento di modifica dalla notifica;) ${intent.getIntExtra(EXTRA_MODIFY_ID, 0)}"
-            title.setText(testo)
+        if(intent.hasExtra(EXTRA_MODIFY_ID)){
+            title.setText("Questo è un evento di modifica xD")
+            val testo = "Questa è l'evento di modifica dalla notifica: ${intent.getIntExtra(EXTRA_MODIFY_ID, 0)}"
+            body.setText(testo)
         }
 
 
