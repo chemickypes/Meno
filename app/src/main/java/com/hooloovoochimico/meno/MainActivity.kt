@@ -2,11 +2,9 @@ package com.hooloovoochimico.meno
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import com.crashlytics.android.Crashlytics
-
+import com.hooloovoochimico.meno.Notifier.Companion.EXTRA_MODIFY_ID
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +21,13 @@ class MainActivity : AppCompatActivity() {
             val note = Notifier(this, 1,Memo(1, title.text.toString(), body.text.toString()))
             note.showNotify()
         }
+
+        if(intent.hasCategory(EXTRA_MODIFY_ID)){
+            val testo = "Questa è l'evento di modifica dalla notifica;) ${intent.getIntExtra(EXTRA_MODIFY_ID, 0)}"
+            title.setText(testo)
+        }
+
+
 
 
 
