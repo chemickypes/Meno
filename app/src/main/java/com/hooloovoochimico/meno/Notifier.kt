@@ -35,10 +35,16 @@ class Notifier(private val context: Context, private val notificationId: Int, pr
         }
         val modifyPendingIntent = PendingIntent.getBroadcast(context, 0, modifyIntent, 0)
 
+        val bodySub = try{
+            "${memo.body.substring(0..20)}..."
+        }catch(e: Exception){
+            memo.body
+        }
+
         mNotifyBuilder = NotificationCompat.Builder(context, MENO_CHANNEL_ID).apply {
             setSmallIcon(R.drawable.ic_launcher_background)
             setContentTitle(memo.title)
-            setContentText(memo.body.substring(0..20)+ "...")
+            setContentText(bodySub)
             setStyle(NotificationCompat.BigTextStyle().bigText(memo.body))
             priority = NotificationCompat.PRIORITY_DEFAULT
             setVisibility(VISIBILITY_PUBLIC)
