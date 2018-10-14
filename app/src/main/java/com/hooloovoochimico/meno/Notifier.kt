@@ -8,15 +8,12 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.hooloovoochimico.meno.MenoConstant.EXTRA_MODIFY_ID
+import com.hooloovoochimico.meno.MenoConstant.MENO_CHANNEL_ID
+import com.hooloovoochimico.meno.MenoConstant.MENO_MODIFY_ACTION
 
 class Notifier(private val context: Context, private val notificationId: Int, private val memo: Memo){
     private var mNotifyBuilder: NotificationCompat.Builder? = null
-
-    companion object {
-        private const val CHANNEL_ID = "99"
-        const val MENO_MODIFY_ACTION = "com.hooloovoochimico.meno.MODIFY_ACTION"
-        const val EXTRA_MODIFY_ID = "extra modify id"
-    }
 
     init {
         createNotificationChannel()
@@ -31,13 +28,13 @@ class Notifier(private val context: Context, private val notificationId: Int, pr
     }
 
     private fun setNotify(){
-        val modifyIntent = Intent(context, MainActivity::class.java).apply {
+        val modifyIntent = Intent(context, ModifyBroadcastReceiver::class.java).apply {
             action = MENO_MODIFY_ACTION
             putExtra(EXTRA_MODIFY_ID, notificationId)
         }
         val modifyPendingIntent = PendingIntent.getBroadcast(context, 0, modifyIntent, 0)
 
-        mNotifyBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
+        mNotifyBuilder = NotificationCompat.Builder(context, MENO_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setContentTitle(memo.title)
                 .setContentText(memo.body)
@@ -58,7 +55,7 @@ class Notifier(private val context: Context, private val notificationId: Int, pr
             val name = "meno notification channel"
             val descriptionText = "this is the meno notification channel name"
             val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+            val channel = NotificationChannel(MENO_CHANNEL_ID, name, importance).apply {
                 description = descriptionText
             }
             // Register the channel with the system

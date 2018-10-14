@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Button
 import android.widget.EditText
-import com.hooloovoochimico.meno.Notifier.Companion.EXTRA_MODIFY_ID
+import com.hooloovoochimico.meno.MenoConstant.EXTRA_MODIFY_ID
 
 
 class MainActivity : AppCompatActivity() {
