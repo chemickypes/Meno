@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationCompat.VISIBILITY_PUBLIC
 import androidx.core.app.NotificationManagerCompat
 import com.hooloovoochimico.meno.MenoConstant.EXTRA_MODIFY_ID
 import com.hooloovoochimico.meno.MenoConstant.MENO_CHANNEL_ID
@@ -34,14 +35,16 @@ class Notifier(private val context: Context, private val notificationId: Int, pr
         }
         val modifyPendingIntent = PendingIntent.getBroadcast(context, 0, modifyIntent, 0)
 
-        mNotifyBuilder = NotificationCompat.Builder(context, MENO_CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle(memo.title)
-                .setContentText(memo.body)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .addAction(R.drawable.common_google_signin_btn_icon_dark,
-                        context.getString(R.string.modify_text),
-                        modifyPendingIntent)
+        mNotifyBuilder = NotificationCompat.Builder(context, MENO_CHANNEL_ID).apply {
+            setSmallIcon(R.drawable.ic_launcher_background)
+            setContentTitle(memo.title)
+            setContentText(memo.body)
+            priority = NotificationCompat.PRIORITY_DEFAULT
+            setVisibility(VISIBILITY_PUBLIC)
+            addAction(R.drawable.common_google_signin_btn_icon_dark,
+                context.getString(R.string.modify_text),
+                modifyPendingIntent)
+        }
     }
 
     fun setBigText(){
